@@ -1,6 +1,7 @@
 import com.hxb.common.model.OrderPayMsgModel;
 import com.hxb.mq.MqProducerApplication;
 import com.hxb.mq.service.BusinessService;
+import com.hxb.structure.util.SnowFlakesUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,12 @@ public class BusinessServiceTest {
      */
     private OrderPayMsgModel buildMsgModel(){
         OrderPayMsgModel msgModel = new OrderPayMsgModel();
-        msgModel.setOrderNo("92039855665");
+        msgModel.setOrderNo(SnowFlakesUtil.nextId());
         msgModel.setAmount(BigDecimal.ONE);
         msgModel.setPayTime(new Date());
         msgModel.setProductName("this is a test product");
         msgModel.setTotalPrice(1000000L);
-        msgModel.setBuyerId(6431231854879313L);
+        msgModel.setBuyerId(SnowFlakesUtil.nextId());
         return msgModel;
     }
 }

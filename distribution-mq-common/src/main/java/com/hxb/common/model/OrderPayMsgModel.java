@@ -15,7 +15,7 @@ public class OrderPayMsgModel implements Serializable {
     /**
      * 订单号
      */
-    private String orderNo;
+    private Long orderNo;
     /**
      * 产品名称
      */
