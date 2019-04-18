@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js">
-</script>
-</head>
-<body>
+
 <div id="proj-aim-box">
 <h3>工程目的：</h3><br/>
 <ul>
@@ -20,5 +12,3 @@
     <li>idea下application.properties文件中提示不认识某配置参数，或配置文件图标异常，是因为idea没有识别到该工程是spring工程，需要在idea->file->project structure->对应工程->配置工程为spring工程<br/></li>
 </ul>
 </div>
-</body>
-</html>
