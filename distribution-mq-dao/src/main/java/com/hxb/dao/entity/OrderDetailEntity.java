@@ -1,96 +1,50 @@
 package com.hxb.dao.entity;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * @author Created by huang xiao bao
+ * @date 2019-04-18 22:26:12
+ */
+@Data
 public class OrderDetailEntity {
+    /**
+     * 明细id,无实际作用，仅用作主键
+     */
     private Integer orderDetailId;
-
+    /**
+     * 产品id
+     */
     private Long productId;
-
+    /**
+     * 产品名称
+     */
     private String productName;
-
+    /**
+     * 产品数量
+     */
     private BigDecimal productAmount;
-
+    /**
+     * 产品总价
+     */
     private Long productTotalPrice;
-
+    /**
+     * 创建时间
+     */
     private Date createTime;
-
+    /**
+     * 订单id
+     */
     private Long orderId;
-
+    /**
+     * 产品单价
+     */
     private Long productPrice;
-
+    /**
+     * 产品图片
+     */
     private String productImg;
-
-    public Integer getOrderDetailId() {
-        return orderDetailId;
-    }
-
-    public void setOrderDetailId(Integer orderDetailId) {
-        this.orderDetailId = orderDetailId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName == null ? null : productName.trim();
-    }
-
-    public BigDecimal getProductAmount() {
-        return productAmount;
-    }
-
-    public void setProductAmount(BigDecimal productAmount) {
-        this.productAmount = productAmount;
-    }
-
-    public Long getProductTotalPrice() {
-        return productTotalPrice;
-    }
-
-    public void setProductTotalPrice(Long productTotalPrice) {
-        this.productTotalPrice = productTotalPrice;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(Long productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public String getProductImg() {
-        return productImg;
-    }
-
-    public void setProductImg(String productImg) {
-        this.productImg = productImg == null ? null : productImg.trim();
-    }
 }

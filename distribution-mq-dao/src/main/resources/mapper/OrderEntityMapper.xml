@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxb.dao.mapper.OrderEntityMapper">
+
   <resultMap id="BaseResultMap" type="com.hxb.dao.entity.OrderEntity">
     <id column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
@@ -11,84 +12,51 @@
     <result column="order_status" jdbcType="TINYINT" property="orderStatus" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
+
   <sql id="Base_Column_List">
-    order_id, total_amount, pay_time, total_price, buyer_id, create_time, order_status, 
+    order_id,
+    total_amount,
+    pay_time,
+    total_price,
+    buyer_id,
+    create_time,
+    order_status,
     modify_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+
+  <!--     根据订单id查询订单信息    -->
+  <select id="queryByOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_order
     where order_id = #{orderId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from t_order
-    where order_id = #{orderId,jdbcType=BIGINT}
-  </delete>
+
+  <!--    新增订单   -->
   <insert id="insert" parameterType="com.hxb.dao.entity.OrderEntity">
-    insert into t_order (order_id, total_amount, pay_time, 
-      total_price, buyer_id, create_time, 
-      order_status, modify_time)
-    values (#{orderId,jdbcType=BIGINT}, #{totalAmount,jdbcType=DECIMAL}, #{payTime,jdbcType=TIMESTAMP}, 
-      #{totalPrice,jdbcType=BIGINT}, #{buyerId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{orderStatus,jdbcType=TINYINT}, #{modifyTime,jdbcType=TIMESTAMP})
+    insert into t_order (
+      order_id,
+      total_amount,
+      pay_time,
+      total_price,
+      buyer_id,
+      create_time,
+      order_status,
+      modify_time)
+    values (
+      #{orderId,jdbcType=BIGINT},
+      #{totalAmount,jdbcType=DECIMAL},
+      #{payTime,jdbcType=TIMESTAMP},
+      #{totalPrice,jdbcType=BIGINT},
+      #{buyerId,jdbcType=BIGINT},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{orderStatus,jdbcType=TINYINT},
+      #{modifyTime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.hxb.dao.entity.OrderEntity">
-    insert into t_order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderId != null">
-        order_id,
-      </if>
-      <if test="totalAmount != null">
-        total_amount,
-      </if>
-      <if test="payTime != null">
-        pay_time,
-      </if>
-      <if test="totalPrice != null">
-        total_price,
-      </if>
-      <if test="buyerId != null">
-        buyer_id,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="orderStatus != null">
-        order_status,
-      </if>
-      <if test="modifyTime != null">
-        modify_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderId != null">
-        #{orderId,jdbcType=BIGINT},
-      </if>
-      <if test="totalAmount != null">
-        #{totalAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="payTime != null">
-        #{payTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="totalPrice != null">
-        #{totalPrice,jdbcType=BIGINT},
-      </if>
-      <if test="buyerId != null">
-        #{buyerId,jdbcType=BIGINT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="orderStatus != null">
-        #{orderStatus,jdbcType=TINYINT},
-      </if>
-      <if test="modifyTime != null">
-        #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hxb.dao.entity.OrderEntity">
+
+  <!--    通过订单id修改非空字段   -->
+  <update id="updateByOrderIdSelective" parameterType="com.hxb.dao.entity.OrderEntity">
     update t_order
     <set>
       <if test="totalAmount != null">
@@ -115,15 +83,5 @@
     </set>
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hxb.dao.entity.OrderEntity">
-    update t_order
-    set total_amount = #{totalAmount,jdbcType=DECIMAL},
-      pay_time = #{payTime,jdbcType=TIMESTAMP},
-      total_price = #{totalPrice,jdbcType=BIGINT},
-      buyer_id = #{buyerId,jdbcType=BIGINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      order_status = #{orderStatus,jdbcType=TINYINT},
-      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
-    where order_id = #{orderId,jdbcType=BIGINT}
-  </update>
+
 </mapper>

@@ -1,17 +1,29 @@
 package com.hxb.dao.mapper;
 
 import com.hxb.dao.entity.UserEntity;
-
+/**
+ * @author Created by huang xiao bao
+ * @date 2019-04-18 22:26:12
+ */
 public interface UserEntityMapper {
-    int deleteByPrimaryKey(Long userId);
-
+    /**
+     * 新增用户
+     * @param record 用户信息
+     * @return 影响行数
+     */
     int insert(UserEntity record);
 
-    int insertSelective(UserEntity record);
+    /**
+     * 根据用户id查询用户信息
+     * @param userId 用户id
+     * @return 影响行数
+     */
+    UserEntity queryByUserId(Long userId);
 
-    UserEntity selectByPrimaryKey(Long userId);
-
-    int updateByPrimaryKeySelective(UserEntity record);
-
-    int updateByPrimaryKey(UserEntity record);
+    /**
+     * 通过用户id修改非空字段
+     * @param record 用户信息
+     * @return 影响行数
+     */
+    int updateByUserIdSelective(UserEntity record);
 }

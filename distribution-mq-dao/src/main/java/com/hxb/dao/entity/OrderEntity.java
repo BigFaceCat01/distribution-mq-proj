@@ -1,86 +1,45 @@
 package com.hxb.dao.entity;
 
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Date;
-
+/**
+ * @author Created by huang xiao bao
+ * @date 2019-04-18 22:26:12
+ */
+@Data
 public class OrderEntity {
+    /**
+     * 订单id
+     */
     private Long orderId;
-
+    /**
+     * 产品总数
+     */
     private BigDecimal totalAmount;
-
+    /**
+     * 支付时间
+     */
     private Date payTime;
-
+    /**
+     * 订单总价
+     */
     private Long totalPrice;
-
+    /**
+     * 购买人id
+     */
     private Long buyerId;
-
+    /**
+     * 创建时间
+     */
     private Date createTime;
-
+    /**
+     * 订单状态 1 未支付 2 已支付 3 订单关闭
+     */
     private Byte orderStatus;
-
+    /**
+     * 修改时间
+     */
     private Date modifyTime;
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public Date getPayTime() {
-        return payTime;
-    }
-
-    public void setPayTime(Date payTime) {
-        this.payTime = payTime;
-    }
-
-    public Long getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Long totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public Long getBuyerId() {
-        return buyerId;
-    }
-
-    public void setBuyerId(Long buyerId) {
-        this.buyerId = buyerId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Byte getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(Byte orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
 }
