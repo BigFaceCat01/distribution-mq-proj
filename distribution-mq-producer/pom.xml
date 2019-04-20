@@ -37,5 +37,14 @@
             <groupId>com.hxb</groupId>
             <artifactId>mq-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.hxb</groupId>
+            <artifactId>mq-dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

@@ -1,11 +1,10 @@
 package com.hxb.mq.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.hxb.common.constant.MqConstants;
-import com.hxb.common.model.OrderPayMsgModel;
+import com.hxb.common.model.request.OrderReq;
+import com.hxb.dao.entity.OrderDetailEntity;
+import com.hxb.dao.entity.OrderEntity;
 import com.hxb.mq.service.BusinessService;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.hxb.structure.util.BeanConvertUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,11 +13,20 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BusinessServiceImpl implements BusinessService {
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
 
     @Override
-    public void sendMsg(OrderPayMsgModel msgModel){
-        rabbitTemplate.convertAndSend(MqConstants.CONSUME_EXCHANGE,MqConstants.CONSUME_ROUTING_KEY, JSON.toJSONString(msgModel));
+    public void insertOrder(OrderReq orderReq) {
+        OrderEntity orderEntity = buildOrder(orderReq);
+        OrderDetailEntity orderDetailEntity = buildOrderDetail(orderReq);
+    }
+
+    private OrderEntity buildOrder(OrderReq orderReq){
+        OrderEntity orderEntity = BeanConvertUtils.convert(orderReq, OrderEntity.class);
+        return orderEntity;
+    }
+
+    private OrderDetailEntity buildOrderDetail(OrderReq orderReq){
+        OrderDetailEntity orderDetailEntity = BeanConvertUtils.convertList(orderReq.getDetails(), OrderDetailEntity.class);
+        return orderDetailEntity;
     }
 }
