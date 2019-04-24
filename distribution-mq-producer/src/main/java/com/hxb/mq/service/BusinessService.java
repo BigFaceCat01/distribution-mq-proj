@@ -1,6 +1,6 @@
 package com.hxb.mq.service;
 
-import com.hxb.common.model.OrderPayMsgModel;
+import com.hxb.common.model.request.OrderReq;
 
 /**
  * @author Created by huang xiao bao
@@ -8,7 +8,8 @@ import com.hxb.common.model.OrderPayMsgModel;
  */
 public interface BusinessService {
     /**
-     * 发送消息
+     * 新增一个订单
+     * @param orderReq 订单信息
      */
-    void sendMsg(OrderPayMsgModel msgModel);
+    void insertOrder(OrderReq orderReq);
 }

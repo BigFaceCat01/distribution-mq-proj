@@ -1,4 +1,4 @@
-package com.hxb.common.model;
+package com.hxb.common.model.mq;
 
 import lombok.Data;
 

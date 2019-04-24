@@ -1,6 +1,7 @@
-import com.hxb.common.model.OrderPayMsgModel;
+import com.hxb.common.model.mq.OrderPayMsgModel;
 import com.hxb.mq.MqProducerApplication;
-import com.hxb.mq.service.BusinessService;
+import com.hxb.mq.service.SendService;
+import com.hxb.structure.util.Md5Utils;
 import com.hxb.structure.util.SnowFlakesUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 /**
@@ -19,10 +23,10 @@ import java.util.Date;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BusinessServiceTest {
     @Autowired
-    private BusinessService businessService;
+    private SendService sendService;
     @Test
     public void testSendMsg(){
-        businessService.sendMsg(buildMsgModel());
+        sendService.sendMessage(buildMsgModel());
     }
 
     /**
@@ -38,5 +42,12 @@ public class BusinessServiceTest {
         msgModel.setTotalPrice(1000000L);
         msgModel.setBuyerId(SnowFlakesUtil.nextId());
         return msgModel;
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(SnowFlakesUtil.nextId());
+        }
+        System.out.println(Md5Utils.md5("admin"));
     }
 }
