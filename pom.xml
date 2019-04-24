@@ -26,16 +26,34 @@
         <lombok.version>1.16.22</lombok.version>
         <alibaba.fastjson.version>1.2.47</alibaba.fastjson.version>
         <mq.common.version>1.0.0-SNAPSHOT</mq.common.version>
+        <mq.dao.version>1.0.0-SNAPSHOT</mq.dao.version>
         <data.structure.version>1.0.0-SNAPSHOT</data.structure.version>
         <mybatis.spring.boot.version>2.0.0</mybatis.spring.boot.version>
         <mysql.connector.version>5.1.46</mysql.connector.version>
+        <swagger.version>2.6.1</swagger.version>
     </properties>
 
     <dependencyManagement>
+
         <dependencies>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.hxb</groupId>
                 <artifactId>mq-common</artifactId>
+                <version>${mq.common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hxb</groupId>
+                <artifactId>mq-dao</artifactId>
                 <version>${mq.common.version}</version>
             </dependency>
             <dependency>
