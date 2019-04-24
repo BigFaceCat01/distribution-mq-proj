@@ -1,6 +1,7 @@
 package com.hxb.dao.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 /**
@@ -8,6 +9,7 @@ import java.util.Date;
  * @date 2019-04-18 22:26:12
  */
 @Data
+@Accessors(chain = true)
 public class UserEntity {
     /**
      * 用户id
