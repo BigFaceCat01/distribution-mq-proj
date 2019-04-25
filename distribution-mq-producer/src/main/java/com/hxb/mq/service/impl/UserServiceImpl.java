@@ -3,6 +3,7 @@ package com.hxb.mq.service.impl;
 import com.hxb.common.model.request.UserSaveReq;
 import com.hxb.dao.entity.UserEntity;
 import com.hxb.dao.mapper.UserEntityMapper;
+import com.hxb.mq.exception.BusinessException;
 import com.hxb.mq.service.UserService;
 import com.hxb.structure.util.BeanConvertUtils;
 import com.hxb.structure.util.Md5Utils;
@@ -26,10 +27,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void insertUser(UserSaveReq saveReq){
+        boolean contain = userEntityMapper.queryByUserName(saveReq.getUserName());
+        if(contain){
+            throw new BusinessException("repeat user name !!!",saveReq.getUserName());
+        }
         UserEntity userEntity = BeanConvertUtils.convert(saveReq, UserEntity.class);
         userEntity.setPassword(Md5Utils.md5(userEntity.getPassword()))
                 .setCreateTime(new Date())
                 .setUserId(SnowFlakesUtil.nextId());
         userEntityMapper.insert(userEntity);
+    }
+
+    @Override
+    public void insertUserWithRedis(UserSaveReq saveReq) {
+
     }
 }

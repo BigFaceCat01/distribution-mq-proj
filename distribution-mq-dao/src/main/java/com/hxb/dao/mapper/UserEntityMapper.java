@@ -21,6 +21,13 @@ public interface UserEntityMapper {
     UserEntity queryByUserId(Long userId);
 
     /**
+     * 查询用户名的数量
+     * @param username 用户名
+     * @return 数量
+     */
+    boolean queryByUserName(String username);
+
+    /**
      * 通过用户id修改非空字段
      * @param record 用户信息
      * @return 影响行数

@@ -27,6 +27,16 @@
       user_id = #{userId,jdbcType=BIGINT}
   </select>
 
+  <!--   查询用户名的数量   -->
+  <select id="queryByUserName" parameterType="string" resultType="boolean">
+    select
+    count(*)
+    from
+    t_user
+    where
+    user_name = #{username,jdbcType=VARCHAR}
+  </select>
+
     <!--   新增用户  -->
   <insert id="insert" parameterType="com.hxb.dao.entity.UserEntity">
     insert into t_user (
