@@ -26,7 +26,8 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     private OrderDetailEntity buildOrderDetail(OrderReq orderReq){
-        OrderDetailEntity orderDetailEntity = BeanConvertUtils.convertList(orderReq.getDetails(), OrderDetailEntity.class);
-        return orderDetailEntity;
+//        OrderDetailEntity orderDetailEntity = BeanConvertUtils.convertList(orderReq.getDetails(), OrderDetailEntity.class);
+//        return orderDetailEntity;
+        return null;
     }
 }

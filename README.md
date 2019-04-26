@@ -15,5 +15,6 @@
     <img src="doc/img/15555547361553.png" />
     <p>step 2:</p><img src="doc/img/15555549453731.png" /></li>
     <li></li>
+    <li>windows 下redis key 失效监听时，发现配置了notify-keyspace-expired Ex但依然没有作用,最终发现windows下redis默认读取的配置文件是另一个，导致无法监听，因此启动时指定配置文件即可 redis-server.exe ./redis.windows.conf</li>
 </ul>
 </div>

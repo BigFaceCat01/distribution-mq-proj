@@ -1,7 +1,6 @@
 package com.hxb.mq.controller;
 
-import com.hxb.common.model.OrderPayMsgModel;
-import com.hxb.mq.service.BusinessService;
+import com.hxb.mq.service.CacheClient;
 import com.hxb.structure.model.Result;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class BusinessController {
+
     @Autowired
-    private BusinessService businessService;
+    private CacheClient cacheClient;
+
+
 
     @ApiOperation(value = "测试幂等性")
     @GetMapping("orders/{orderId}")
     public Result<Void> test(@PathVariable("orderId") Long orderId){
-        businessService.sendMsg(new OrderPayMsgModel());
+        cacheClient.setIfAbsent("weather","hot");
         return Result.success();
     }
 }
