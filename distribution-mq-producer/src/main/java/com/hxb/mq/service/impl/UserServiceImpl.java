@@ -1,9 +1,11 @@
 package com.hxb.mq.service.impl;
 
 import com.hxb.common.model.request.UserSaveReq;
+import com.hxb.common.model.response.AllUserInfoVO;
 import com.hxb.common.model.response.CacheResult;
 import com.hxb.dao.entity.UserEntity;
 import com.hxb.dao.mapper.UserEntityMapper;
+import com.hxb.mq.aop.ParamLog;
 import com.hxb.mq.constants.UserConstants;
 import com.hxb.mq.exception.BusinessException;
 import com.hxb.mq.service.CacheClient;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,6 +29,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @Slf4j
+@ParamLog
 public class UserServiceImpl implements UserService {
     @Resource
     private UserEntityMapper userEntityMapper;
@@ -33,6 +37,12 @@ public class UserServiceImpl implements UserService {
     private CacheClient cacheClient;
 
     @Override
+    public List<AllUserInfoVO> listAllUser() {
+        return BeanConvertUtils.convertList(userEntityMapper.listAllUser(),AllUserInfoVO.class);
+    }
+
+    @Override
+    @ParamLog
     public void insertUser(UserSaveReq saveReq){
         boolean contain = userEntityMapper.queryByUserName(saveReq.getUserName());
         if(contain){
@@ -46,11 +56,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @ParamLog
     public void insertUserWithRedis(UserSaveReq saveReq) {
         String key = UserConstants.USER_REGISTER_PREFIX + saveReq.getUserName();
         CacheResult cacheResult = cacheClient.setIfAbsent(key, key,TimeUnit.SECONDS,3);
-        if(cacheResult.getSuccess()){
-            throw new BusinessException("");
+        if(!cacheResult.getSuccess()){
+            //调用redis失败
+            throw new BusinessException("please try it after three seconds");
         }
+        if(!cacheResult.getData(Boolean.class)){
+            //已经有人在进行该用户名的添加
+            throw new BusinessException("click quickly!!!");
+        }
+        insertUser(saveReq);
     }
 }

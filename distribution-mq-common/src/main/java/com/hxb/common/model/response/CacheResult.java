@@ -39,7 +39,7 @@ public class CacheResult {
     }
 
     @SuppressWarnings(value = "unchecked")
-    public <T> T getData(){
+    public <T> T getData(Class<T> tClass){
         return Objects.nonNull(data) ? (T)data : null;
     }
 }

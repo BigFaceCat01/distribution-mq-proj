@@ -4,6 +4,7 @@
 
   <resultMap id="BaseResultMap" type="com.hxb.dao.entity.ProductStockEntity">
     <id column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="product_name" jdbcType="DECIMAL" property="productName" />
     <result column="amount" jdbcType="DECIMAL" property="amount" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
@@ -11,6 +12,7 @@
 
   <sql id="Base_Column_List">
     product_id,
+    product_name,
     amount,
     create_time,
     modify_time
@@ -26,15 +28,25 @@
       product_id = #{productId,jdbcType=BIGINT}
   </select>
 
+  <!--   获得所有商品库存信息   -->
+  <select id="listAllProductStock" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    t_product_stock
+  </select>
+
   <!--   新增产品库存记录   -->
   <insert id="insert" parameterType="com.hxb.dao.entity.ProductStockEntity">
     insert into t_product_stock (
       product_id,
+      product_name,
       amount,
       create_time,
       modify_time)
     values (
       #{productId,jdbcType=BIGINT},
+      #{productName,jdbcType=VARCHAR},
       #{amount,jdbcType=DECIMAL},
       #{createTime,jdbcType=TIMESTAMP},
       #{modifyTime,jdbcType=TIMESTAMP})
@@ -44,6 +56,9 @@
   <update id="updateByProductIdSelective" parameterType="com.hxb.dao.entity.ProductStockEntity">
     update t_product_stock
     <set>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
       <if test="amount != null">
         amount = #{amount,jdbcType=DECIMAL},
       </if>

@@ -4,6 +4,7 @@ import com.hxb.structure.model.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -30,7 +31,8 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public Object handle(BusinessException exception) {
         log.error(exception.getMsg()+":{}", Objects.nonNull(exception.getData()) ? exception.getData() : "");
-        return Result.build("-1",BusinessException.DEFAULT_MESSAGE,exception.getData());
+        String msg = StringUtils.isEmpty(exception.getMsg()) ? BusinessException.DEFAULT_MESSAGE : exception.getMsg();
+        return Result.build("-1",msg,exception.getData());
     }
     /**
      * 未知异常

@@ -1,6 +1,9 @@
 package com.hxb.dao.mapper;
 
 import com.hxb.dao.entity.UserEntity;
+
+import java.util.List;
+
 /**
  * @author Created by huang xiao bao
  * @date 2019-04-18 22:26:12
@@ -19,6 +22,12 @@ public interface UserEntityMapper {
      * @return 影响行数
      */
     UserEntity queryByUserId(Long userId);
+
+    /**
+     * 查询所有用户
+     * @return 用户列表
+     */
+    List<UserEntity> listAllUser();
 
     /**
      * 查询用户名的数量

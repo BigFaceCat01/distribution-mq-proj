@@ -32,11 +32,21 @@
         <mysql.connector.version>6.0.6</mysql.connector.version>
         <slf4j.version>1.7.21</slf4j.version>
          <swagger.version>2.6.1</swagger.version>
+        <jackson.databind.version>2.9.8</jackson.databind.version>
     </properties>
 
     <dependencyManagement>
 
+
         <dependencies>
+
+            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.databind.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>

@@ -3,6 +3,7 @@ package com.hxb.mq.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.hxb.common.constant.MqConstants;
 import com.hxb.common.model.mq.OrderPayMsgModel;
+import com.hxb.mq.aop.ParamLog;
 import com.hxb.mq.service.SendService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -20,6 +21,7 @@ public class SendServiceImpl implements SendService {
     private RabbitTemplate rabbitTemplate;
 
     @Override
+    @ParamLog
     public void sendMessage(OrderPayMsgModel msgModel) {
         String msg = JSON.toJSONString(msgModel);
         log.info("发送订单支付消息:{}",msg);

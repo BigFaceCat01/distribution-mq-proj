@@ -1,6 +1,8 @@
 package com.hxb.dao.mapper;
 
 import com.hxb.dao.entity.ProductStockEntity;
+import java.util.List;
+
 /**
  * @author Created by huang xiao bao
  * @date 2019-04-18 22:26:12
@@ -20,6 +22,12 @@ public interface ProductStockEntityMapper {
      * @return 影响行数
      */
     ProductStockEntity queryByProductId(Long productId);
+
+    /**
+     * 获得所有商品库存信息
+     * @return 库存列表
+     */
+    List<ProductStockEntity> listAllProductStock();
 
     /**
      * 通过产品id修改非空字段
