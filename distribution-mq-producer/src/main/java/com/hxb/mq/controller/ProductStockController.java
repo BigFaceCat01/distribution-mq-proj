@@ -49,8 +49,20 @@ public class ProductStockController {
 
     @ApiOperation("秒杀商品")
     @PutMapping("product/seckill/{productId}")
-    public Result<List<AllProductStockVO>> listAllUser(@PathVariable("productId") Long productId){
+    public Result<Void> seckill(@PathVariable("productId") Long productId){
         productStockService.seckill(productId);
+        return Result.success();
+    }
+    @ApiOperation("秒杀商品，使用了synchronize关键字")
+    @PutMapping("product/seckill/synchronized/{productId}")
+    public Result<Void> seckillWithSynchronized(@PathVariable("productId") Long productId){
+        productStockService.seckillWithSynchronized(productId);
+        return Result.success();
+    }
+    @ApiOperation("秒杀商品，使用了数据库乐观锁")
+    @PutMapping("product/seckill/positive//{productId}")
+    public Result<Void> seckillWithPositiveLock(@PathVariable("productId") Long productId){
+        productStockService.seckillWithPositiveLock(productId);
         return Result.success();
     }
 }

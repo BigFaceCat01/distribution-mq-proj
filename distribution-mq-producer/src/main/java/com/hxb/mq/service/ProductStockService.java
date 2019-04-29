@@ -34,4 +34,17 @@ public interface ProductStockService {
      * @param productId 商品id
      */
     void seckill(Long productId);
+
+    /**
+     * 秒杀商品,只是简单的进行库存判断,使用synchronize关键字
+     * 是否库存大于0
+     * @param productId 商品id
+     */
+    void seckillWithSynchronized(Long productId);
+    /**
+     * 秒杀商品,只是简单的进行库存判断,使用数据库乐观锁
+     * 是否库存大于0
+     * @param productId 商品id
+     */
+    void seckillWithPositiveLock(Long productId);
 }

@@ -8,6 +8,7 @@
     <result column="amount" jdbcType="DECIMAL" property="amount" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="product_stock_version" jdbcType="INTEGER" property="productStockVersion" />
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -15,7 +16,8 @@
     product_name,
     amount,
     create_time,
-    modify_time
+    modify_time,
+    product_stock_version
   </sql>
 
   <!--   根据产品id查询产品库存信息   -->
@@ -43,13 +45,15 @@
       product_name,
       amount,
       create_time,
-      modify_time)
+      modify_time,
+      product_stock_version)
     values (
       #{productId,jdbcType=BIGINT},
       #{productName,jdbcType=VARCHAR},
       #{amount,jdbcType=DECIMAL},
       #{createTime,jdbcType=TIMESTAMP},
-      #{modifyTime,jdbcType=TIMESTAMP})
+      #{modifyTime,jdbcType=TIMESTAMP},
+      #{productStockVersion,jdbcType=INTEGER})
   </insert>
 
     <!--   通过产品id修改非空字段   -->
@@ -68,7 +72,34 @@
       <if test="modifyTime != null">
         modify_time = #{modifyTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="productStockVersion != null">
+        product_stock_version = #{productStockVersion,jdbcType=INTEGER},
+      </if>
     </set>
     where product_id = #{productId,jdbcType=BIGINT}
+  </update>
+
+  <!--   通过产品id修改非空字段   -->
+  <update id="updateByProductIdAndVersionSelective" parameterType="com.hxb.dao.model.ProductStockUpdateModel">
+    update t_product_stock
+    <set>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productStockVersion != null">
+        product_stock_version = #{productStockVersion,jdbcType=INTEGER},
+      </if>
+    </set>
+    where product_id = #{productId,jdbcType=BIGINT}
+    and product_stock_version = #{oldProductStockVersion}
   </update>
 </mapper>

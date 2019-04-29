@@ -2,7 +2,20 @@
 <div id="proj-aim-box">
 <h3>工程目的：</h3><br/>
 <ul>
-    <li>用于异步消息一致性测试</li>
+    <li>幂等性：
+    <ul>
+        <li>新增幂等性</li>
+        <li>修改幂等性</li>
+    </ul>
+    </li>
+    <li>秒杀分析：
+    <ul>
+        <li>只是最简单的查询库存大于0，然后库存减1。jmeter 10个线程模拟并发访问商品（10个库存），出现丢失更新，结果几乎都不为0</li>
+        <li>使用java synchronized关键字加在service上，jmeter并发访问都没有问题，但随着线程增多出现了等待时间直线上升的情况，使用改关键字若多实例便失去作用</li>
+        <li>使用数据库乐观锁，</li>
+    </ul>
+    </li>
+    <li>异步消息一致性分析</li>
 </ul>
 </div>
 <div id="proj-problem-box">

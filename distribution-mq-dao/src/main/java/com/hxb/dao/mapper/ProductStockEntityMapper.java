@@ -1,6 +1,8 @@
 package com.hxb.dao.mapper;
 
 import com.hxb.dao.entity.ProductStockEntity;
+import com.hxb.dao.model.ProductStockUpdateModel;
+
 import java.util.List;
 
 /**
@@ -35,4 +37,11 @@ public interface ProductStockEntityMapper {
      * @return 影响行数
      */
     int updateByProductIdSelective(ProductStockEntity record);
+
+    /**
+     * 通过产品id和版本号修改非空字段
+     * @param updateModel 产品库存信息
+     * @return 影响行数
+     */
+    int updateByProductIdAndVersionSelective(ProductStockUpdateModel updateModel);
 }

@@ -5,6 +5,7 @@ import com.hxb.common.model.request.ProductStockUpdateReq;
 import com.hxb.common.model.response.AllProductStockVO;
 import com.hxb.dao.entity.ProductStockEntity;
 import com.hxb.dao.mapper.ProductStockEntityMapper;
+import com.hxb.dao.model.ProductStockUpdateModel;
 import com.hxb.mq.aop.ParamLog;
 import com.hxb.mq.exception.BusinessException;
 import com.hxb.mq.service.ProductStockService;
@@ -65,5 +66,33 @@ public class ProductStockServiceImpl implements ProductStockService {
                 .productId(productId)
                 .build();
         productStockEntityMapper.updateByProductIdSelective(stockEntity);
+    }
+
+    @Override
+    @ParamLog
+    public synchronized void seckillWithSynchronized(Long productId) {
+        seckill(productId);
+    }
+
+    @Override
+    @ParamLog
+    public void seckillWithPositiveLock(Long productId) {
+        ProductStockEntity oldEntity = productStockEntityMapper.queryByProductId(productId);
+        //0大于库存不抛异常，小于等于都应该抛出异常
+        if(BigDecimal.ZERO.compareTo(oldEntity.getAmount()) != -1 ){
+            log.info("{} sold out",productId);
+            throw new BusinessException("this product has been sold out");
+        }
+        ProductStockUpdateModel stockUpdateModel = ProductStockUpdateModel.builder().amount(oldEntity.getAmount().subtract(BigDecimal.ONE))
+                .modifyTime(new Date())
+                .productId(productId)
+                .productStockVersion(oldEntity.getProductStockVersion() + 1)
+                .oldProductStockVersion(oldEntity.getProductStockVersion())
+                .build();
+        int updateCount = productStockEntityMapper.updateByProductIdAndVersionSelective(stockUpdateModel);
+        //若没有更新到，则表示有人先一步更新了，刚刚查出的数据已无效，这里直接抛出异常，让用户新秒杀
+        if(updateCount == 0){
+            throw new BusinessException("seckill failed!!! please try it again");
+        }
     }
 }

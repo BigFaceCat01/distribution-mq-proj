@@ -4,6 +4,7 @@ CREATE TABLE `t_product_stock` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `modify_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `product_name` varchar(100) NOT NULL DEFAULT '' COMMENT '商品名称',
+  `version` int(12) NOT NULL DEFAULT '1' COMMENT '版本号',
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='简单商品库存表';
 
