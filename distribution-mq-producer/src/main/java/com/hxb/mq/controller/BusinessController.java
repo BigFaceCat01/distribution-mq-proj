@@ -1,11 +1,12 @@
 package com.hxb.mq.controller;
 
-import com.hxb.mq.service.CacheClient;
+import com.hxb.smart.rpc.api.HelloService;
+import com.hxb.smart.rpcv2.RpcFactory;
+import com.hxb.smart.rpcv2.core.invoker.reference.InvokerProxyBean;
 import com.hxb.structure.model.Result;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class BusinessController {
 
     @Autowired
-    private CacheClient cacheClient;
+    private RpcFactory rpcFactory;
 
 
 
-    @ApiOperation(value = "测试幂等性")
-    @GetMapping("orders/{orderId}")
-    public Result<Void> test(@PathVariable("orderId") Long orderId){
-        cacheClient.setIfAbsent("weather","hot");
-        return Result.success();
+    @ApiOperation(value = "测试rpc")
+    @GetMapping("test/rpc")
+    public Result<Integer> testRpc(Integer a,Integer b){
+        HelloService helloService = (HelloService) (InvokerProxyBean.newProxyBean(HelloService.class,rpcFactory).getObject());
+        return Result.success(helloService.plus(a,b));
     }
 }
