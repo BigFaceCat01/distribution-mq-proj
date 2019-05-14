@@ -49,8 +49,8 @@
             </dependency>
 
             <dependency>
-                <groupId>com.hxb</groupId>
-                <artifactId>netty-demo-proj</artifactId>
+                <groupId>com.yma</groupId>
+                <artifactId>rpc</artifactId>
                 <version>${my.rpc.version}</version>
             </dependency>
 

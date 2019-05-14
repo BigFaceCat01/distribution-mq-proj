@@ -5,13 +5,14 @@ import com.hxb.dao.entity.OrderDetailEntity;
 import com.hxb.dao.entity.OrderEntity;
 import com.hxb.mq.service.BusinessService;
 import com.hxb.structure.util.BeanConvertUtils;
+import com.yma.rpc.core.provider.annotation.Rpc;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Created by huang xiao bao
  * @date 2019-04-17 11:36:02
  */
-@Service
+@Rpc
 public class BusinessServiceImpl implements BusinessService {
 
     @Override

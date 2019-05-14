@@ -1,6 +1,7 @@
 package com.hxb.mq.service;
 
 import com.hxb.common.model.request.OrderReq;
+import com.yma.rpc.core.invoker.annotation.RpcApi;
 
 /**
  * @author Created by huang xiao bao

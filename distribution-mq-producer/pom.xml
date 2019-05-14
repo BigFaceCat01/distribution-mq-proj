@@ -48,8 +48,8 @@
             <artifactId>fastjson</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.hxb</groupId>
-            <artifactId>netty-demo-proj</artifactId>
+            <groupId>com.yma</groupId>
+            <artifactId>rpc</artifactId>
         </dependency>
         <dependency>
             <groupId>com.hxb</groupId>

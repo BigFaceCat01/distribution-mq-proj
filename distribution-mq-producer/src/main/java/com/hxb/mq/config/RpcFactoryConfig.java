@@ -1,11 +1,9 @@
 package com.hxb.mq.config;
 
-import com.hxb.smart.rpcv2.RpcFactory;
-import com.hxb.smart.rpcv2.configuration.RpcConfig;
-import com.hxb.smart.rpcv2.core.invoker.router.impl.RandomRouter;
-import com.hxb.smart.rpcv2.core.net.NetType;
-import com.hxb.smart.rpcv2.registry.impl.LocalServiceRegistry;
-import com.hxb.smart.rpcv2.serializer.impl.HessianSerializer;
+import com.yma.rpc.RpcFactory;
+import com.yma.rpc.configuration.RpcConfig;
+import com.yma.rpc.constant.RpcRole;
+import com.yma.rpc.core.net.NetType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,12 +17,10 @@ public class RpcFactoryConfig {
     public RpcFactory rpcFactory(){
         RpcConfig config = RpcConfig.builder()
                 .basePackage("com.hxb")
+                .rpcRole(RpcRole.BOTH)
                 .netType(NetType.NETTY)
                 .registryCenterAddress("0.0.0.0")
-                .router(new RandomRouter())
-                .serviceRegistry(new LocalServiceRegistry())
-                .serializer(new HessianSerializer())
                 .build();
-        return RpcFactory.builder().config(config).build();
+        return new RpcFactory(config);
     }
 }
