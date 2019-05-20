@@ -5,7 +5,7 @@
     <parent>
         <artifactId>distribution</artifactId>
         <groupId>com.hxb</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,8 +13,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.yma</groupId>
-            <artifactId>rpc</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -40,6 +40,10 @@
         <dependency>
             <groupId>com.hxb</groupId>
             <artifactId>mq-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hxb</groupId>
+            <artifactId>mq-dao</artifactId>
         </dependency>
     </dependencies>
 </project>

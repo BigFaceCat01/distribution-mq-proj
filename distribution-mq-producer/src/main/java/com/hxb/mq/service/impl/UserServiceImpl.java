@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * @author Created by huang xiao bao
  * @date 2019-04-24 17:41:46
  */
-@Service
+@Service(value = "com.hxb.mq.service.UserService")
 @Slf4j
 @ParamLog
 public class UserServiceImpl implements UserService {

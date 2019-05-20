@@ -13,7 +13,7 @@
     <groupId>com.hxb</groupId>
     <artifactId>distribution</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <modules>
         <module>distribution-mq-producer</module>
         <module>distribution-mq-consumer</module>
@@ -25,8 +25,8 @@
         <rabbit.mq.version>2.0.3.RELEASE</rabbit.mq.version>
         <lombok.version>1.16.22</lombok.version>
         <alibaba.fastjson.version>1.2.47</alibaba.fastjson.version>
-        <mq.common.version>1.0.0-SNAPSHOT</mq.common.version>
-        <mq.dao.version>1.0.0-SNAPSHOT</mq.dao.version>
+        <mq.common.version>1.0.0</mq.common.version>
+        <mq.dao.version>1.0.0</mq.dao.version>
         <data.structure.version>1.0.0-SNAPSHOT</data.structure.version>
         <mybatis.spring.boot.version>2.0.0</mybatis.spring.boot.version>
         <mysql.connector.version>6.0.6</mysql.connector.version>
@@ -46,12 +46,6 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.databind.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.yma</groupId>
-                <artifactId>rpc</artifactId>
-                <version>${my.rpc.version}</version>
             </dependency>
 
             <dependency>
@@ -150,6 +144,7 @@
         </plugins>
         <pluginManagement>
             <plugins>
+
                 <plugin>
                     <groupId>org.mybatis.generator</groupId>
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
