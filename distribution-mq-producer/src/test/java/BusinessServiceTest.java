@@ -1,6 +1,8 @@
 import com.hxb.common.model.mq.OrderPayMsgModel;
 import com.hxb.mq.MqProducerApplication;
+import com.hxb.mq.service.BusinessService;
 import com.hxb.mq.service.SendService;
+import com.hxb.mq.service.impl.TempService;
 import com.hxb.structure.util.Md5Utils;
 import com.hxb.structure.util.SnowFlakesUtil;
 import org.junit.Test;
@@ -9,11 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.ServiceLoader;
 
 /**
  * @author Created by huang xiao bao
@@ -28,6 +34,8 @@ public class BusinessServiceTest {
     public void testSendMsg(){
         sendService.sendMessage(buildMsgModel());
     }
+
+
 
     /**
      * build a message model
@@ -45,9 +53,12 @@ public class BusinessServiceTest {
     }
 
     public static void main(String[] args) {
-        for (int i = 0; i < 5; i++) {
-            System.out.println(SnowFlakesUtil.nextId());
+        TempService tempService = new TempService();
+        try {
+            Method say = TempService.class.getDeclaredMethod("say",new Class<?>[]{String.class});
+            say.invoke(tempService,"hello");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println(Md5Utils.md5("admin"));
     }
 }

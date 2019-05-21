@@ -16,6 +16,7 @@ import com.hxb.structure.util.SnowFlakesUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -28,7 +29,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Service(value = "com.hxb.mq.service.UserService")
 @Slf4j
-@ParamLog
 public class UserServiceImpl implements UserService {
     @Resource
     private UserEntityMapper userEntityMapper;
@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @ParamLog
+    @Transactional(rollbackFor = Exception.class)
     public void insertUser(UserSaveReq saveReq){
         boolean contain = userEntityMapper.queryByUserName(saveReq.getUserName());
         if(contain){
@@ -52,6 +53,7 @@ public class UserServiceImpl implements UserService {
                 .setCreateTime(new Date())
                 .setUserId(SnowFlakesUtil.nextId());
         userEntityMapper.insert(userEntity);
+        int  i = 1/0;
     }
 
     @Override
