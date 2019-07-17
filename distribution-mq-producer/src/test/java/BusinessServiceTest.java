@@ -1,6 +1,9 @@
 import com.hxb.common.model.mq.OrderPayMsgModel;
+import com.hxb.common.model.request.UserSaveReq;
 import com.hxb.mq.MqProducerApplication;
+import com.hxb.mq.service.AbstractUserService;
 import com.hxb.mq.service.BusinessService;
+import com.hxb.mq.service.CacheClient;
 import com.hxb.mq.service.SendService;
 import com.hxb.mq.service.impl.TempService;
 import com.hxb.structure.util.Md5Utils;
@@ -9,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.lang.reflect.Method;
@@ -33,6 +37,17 @@ public class BusinessServiceTest {
     @Test
     public void testSendMsg(){
         sendService.sendMessage(buildMsgModel());
+    }
+    @Autowired
+    private AbstractUserService abstractUserService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+    @Test
+    public void testRedis(){
+        UserSaveReq saveReq = UserSaveReq.builder().userName("test cglib transcation 2").password("asdkjlj2oijej").build();
+        abstractUserService.insertUser(saveReq);
+        System.out.println();
     }
 
 
