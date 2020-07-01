@@ -29,7 +29,7 @@
         <mq.dao.version>1.0.0</mq.dao.version>
         <data.structure.version>1.0.0-SNAPSHOT</data.structure.version>
         <mybatis.spring.boot.version>2.0.0</mybatis.spring.boot.version>
-        <mysql.connector.version>6.0.6</mysql.connector.version>
+        <mysql.connector.version>8.0.16</mysql.connector.version>
         <slf4j.version>1.7.21</slf4j.version>
          <swagger.version>2.6.1</swagger.version>
         <jackson.databind.version>2.9.8</jackson.databind.version>
